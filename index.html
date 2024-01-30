@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v6.1.1/css/pro.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/abbab5253a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <title>Pascold_RadioList</title>
+</head>
+<body>
+    <div class="RadioList">
+        <div class="RadioListTop">
+            <i class="fa-solid fa-walkie-talkie"></i><span style="margin-left: 7px; margin-right: 5px;" id="Frequency">Radio: 0</span>
+            <br>
+            <i class="fa-solid fa-users"></i><span style="margin-right: 3px;" id="Active">Osoby: 0</span>
+            <hr>
+        </div>
+        <div id="PersonList">
+        </div>
+    </div>
+</body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        font-family: 'Poppins';
+        font-size: 13px;
+        color: white;
+    }
+    .RadioList {
+        position: absolute;
+        padding: 1.5vh;
+        border-radius: 1vh;
+        left: 20px;
+        top: 40%;
+        width: 210px;
+        background-color: rgba(36, 36, 36, 0.809);
+        
+    }
+    #Active {
+        margin-left: 5px;
+    }
+    #Badge {
+        float: right;
+        color: grey;
+
+    }
+
+    #Name {
+        margin-left: 4px;
+    }
+    .User {
+        margin-top: 1vh;
+
+        color: rgb(255, 255, 255);
+    }
+</style>
+<script>
+    window.addEventListener("message", (event) => {
+        switch(event.data.type) {
+            case 'ShowUI':
+                $(".RadioList").fadeIn(150);
+                setTimeout(() => {
+                    $(".RadioList").show();
+                }, 150);
+                document.getElementById("Frequency").textContent = 'Radio: '+event.data.channel;
+                document.getElementById("Active").textContent = 'Osoby: '+event.data.count;
+                UpdateList(event.data.players);
+                break;
+            case 'HideUI':
+                $(".RadioList").fadeOut(150);
+                setTimeout(() => {
+                    $(".RadioList").hide();
+                }, 150);
+        }
+
+        function UpdateList(players) {
+            let PlayerList = '';
+            for (let i in players) {
+                let data = players[i];
+                let name = data.player;
+                let badge = data.badge;
+                let talking = data.isTalking;
+                if (talking == true) {
+                    PlayerList = PlayerList + '<div class="User" id="User"><i style="color: rgb(2, 182, 2);" class="fa-solid fa-microphone"></i> <span id="Name">'+name+'</span><span id="Badge">'+badge+'</span></div>'
+                } else {
+                    PlayerList = PlayerList + '<div class="User" id="User"><i style="color: red;"" class="fa-solid fa-microphone"></i> <span id="Name" style="color: white;">'+name+'</span><span id="Badge">'+badge+'</span></div>'
+                }
+            }
+            this.document.getElementById("PersonList").innerHTML = PlayerList;
+            return
+        }
+    })
+</script>
+</html>
