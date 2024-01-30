@@ -22,6 +22,7 @@ files {
 }
 
 depedencies {
+    'es_extended',
     'ox_lib',
     'oxmysql',
     'pma-voice'
