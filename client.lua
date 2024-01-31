@@ -30,7 +30,7 @@ CreateThread(function()
             elseif tostring(channel) == "10" then
                 channel = 'DOJ'
             end
-            local players = lib.callback.await('piotreq_radiolist:GetUsers')
+            local players = lib.callback.await('pascold_radiolist:GetUsers')
             sleep = 0 -- co ile odświeża ui gdy jesteś na radiu (0.5 sekundy)
             SendNUIMessage({
                 type = 'ShowUI',
@@ -39,7 +39,7 @@ CreateThread(function()
                 players = players,
             })  
         elseif tostring(channel) > "10" then
-            local players = lib.callback.await('piotreq_radiolist:GetUsers2')
+            local players = lib.callback.await('pascold_radiolist:GetUsers2')
             sleep = 0 -- co ile odświeża ui gdy jesteś na radiu (0.5 sekundy)
             SendNUIMessage({
                 type = 'ShowUI',
