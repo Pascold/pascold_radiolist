@@ -38,7 +38,7 @@ function GetFrakcjeName(player)
 						xPlayer.set('sex', row.sex)
 						xPlayer.set('height', row.height)
 						xPlayer.set('ssn', row.ssn)
-						xPlayer.set('job_id', row.job_id)
+						xPlayer.set('badge', row.badge)
                         xPlayer.set('streamer', row.streamer)
                 end
             end
@@ -71,7 +71,7 @@ function GetCrimeName(player)
 						xPlayer.set('dateofbirth', row.dateofbirth)
 						xPlayer.set('sex', row.sex)
 						xPlayer.set('height', row.height)
-						xPlayer.set('job_id', row.job_id)
+						xPlayer.set('badge', row.badge)
                         xPlayer.set('streamer', row.streamer)
                 end
             end
@@ -131,13 +131,13 @@ function GetPlayerBadge(player)
 						xPlayer.set('dateofbirth', row.dateofbirth)
 						xPlayer.set('sex', row.sex)
 						xPlayer.set('height', row.height)
-						xPlayer.set('job_id', row.job_id)
+						xPlayer.set('badge', row.badge)
                         xPlayer.set('streamer', row.streamer)
                 end
             end
         end
     end)
-    local badge = '['..xPlayer.get('job_id')..']'
+    local badge = '['..xPlayer.get('badge')..']'
     if (badge == '') then 
         badge = ''
     end
